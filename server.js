@@ -11,7 +11,11 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors({
-  origin: '*', // Allow all origins
+  origin: [
+    'https://todo-frontend-aby132.vercel.app',
+    'https://todo-frontend-byp4a4b28-aby132s-projects.vercel.app',
+    'http://localhost:5173' 
+  ],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: false

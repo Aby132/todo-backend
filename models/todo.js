@@ -19,18 +19,17 @@ const todoSchema = new mongoose.Schema({
   }
 }, {
   timestamps: true,
+  toJSON: {
+    transform: function(doc, ret) {
+      ret.id = ret._id;
+      delete ret.__v;
+      return ret;
+    },
+    virtuals: true
+  }
 });
 
 // Add index for better query performance
 todoSchema.index({ createdAt: -1 });
-
-// Add instance method to format the todo
-todoSchema.methods.toJSON = function() {
-  const todo = this.toObject();
-  todo.id = todo._id;
-  delete todo._id;
-  delete todo.__v;
-  return todo;
-};
 
 export const Todo = mongoose.model('Todo', todoSchema); 
